@@ -3,7 +3,9 @@ class UnbordingContent {
   String title;
   String discription;
 
-  UnbordingContent({this.image, this.title, this.discription});
+   /// Updated The parameter 'image', 'title','discription',  can't have a value of 'null' because of its type, but the implicit default value is 'null'. 
+
+  UnbordingContent({required this.image, required this.title, required this.discription});
 }
 
 List<UnbordingContent> contents = [

@@ -10,7 +10,8 @@ class Onbording extends StatefulWidget {
 
 class _OnbordingState extends State<Onbording> {
   int currentIndex = 0;
-  PageController _controller;
+  /// The current implementation will work on current versions of flutter (I added late )
+  late PageController _controller;
 
   @override
   void initState() {
@@ -82,28 +83,34 @@ class _OnbordingState extends State<Onbording> {
             height: 60,
             margin: EdgeInsets.all(40),
             width: double.infinity,
-            child: FlatButton(
-              child: Text(
-                  currentIndex == contents.length - 1 ? "Continue" : "Next"),
+            /// Updated FlatButton which is Deprecated to TextButton instead
+            child: TextButton(
               onPressed: () {
                 if (currentIndex == contents.length - 1) {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => Home(),
+                      builder: (_) => const Home(),
                     ),
                   );
                 }
                 _controller.nextPage(
-                  duration: Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 100),
                   curve: Curves.bounceIn,
                 );
               },
-              color: Theme.of(context).primaryColor,
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Theme.of(context).primaryColor),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
               ),
+              child: Text(
+                  currentIndex == contents.length - 1 ? "Continue" : "Next"),
             ),
           )
         ],
